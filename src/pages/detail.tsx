@@ -7,6 +7,8 @@ import { Close } from "@mui/icons-material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useCallback, useEffect, useState } from "react";
 import { closeTicket, getAllAnswers, setAnswer } from "../utils/localStorage";
+import SendIcon from '@mui/icons-material/Send';
+
 const Detail = ()=>{
     let navigate = useNavigate();
     const param = useParams();
@@ -14,7 +16,7 @@ const Detail = ()=>{
     const [pageSize, setPageSize] = useState<number>(5);
     const [userAnswers,setUserAnswers] = useState<IAnswer[]>([])
     const columns:GridColDef[] = [
-        { field: 'message', headerName: 'answer' },       
+        { field: 'message', headerName: 'پاسخ ها',width:450 },       
     ]
 
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<ITicket>();
@@ -40,10 +42,10 @@ const Detail = ()=>{
             <div className="w-full m-4 flex flex-col justify-center items-center " >
                 <Box className="w-96 flex mt-4 mb-4 justify-between" >
                     <Button  className="h-10" color="primary" variant="contained" 
-                        onClick={()=>navigate("/")}  ><HomeIcon/>Back To Home</Button>      
+                        onClick={()=>navigate("/")}  ><HomeIcon/>لیست تیکت ها</Button>      
 
                     <Button  className="h-10"  color="warning" variant="contained" 
-                        onClick={()=>{closeThisTicket();navigate("/")}}  ><Close/>Close Ticket</Button>      
+                        onClick={()=>{closeThisTicket();navigate("/")}}  ><Close/>بستن تیکت</Button>      
                     
                 </Box> 
                 <Paper className="w-96 flex flex-col p-8 justify-center items-center " >
@@ -53,11 +55,12 @@ const Detail = ()=>{
                                 placeholder="Answer" {...register("message",{required:true})} />
                         </Box>
                         {errors.message && <span className='text-sm text-red-500' >
-                            This field is required
+                            این فیلد اجباری است
                         </span>
                         }     
-                        <Button type='submit' fullWidth  color='primary' variant='contained' autoFocus>
-                            Submit The Answer
+                        <Button type='submit' fullWidth  color='error' variant='contained' autoFocus>
+                            <SendIcon fontSize="small" />
+                            ارسال پاسخ
                         </Button> 
                     </form>    
                 </Paper>

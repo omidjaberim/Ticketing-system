@@ -32,19 +32,21 @@ const AddTicket = (prop:IProp)=>{
         <Dialog
             open={open}
             onClose={handleClose}
+            fullWidth
+            maxWidth="md"
         >
             <form onSubmit={handleSubmit(onSubmit)}>
             <DialogTitle id="ticket">
-                <Email className='m-2' />
-                Adding Ticket
+                <Email className='m-2' color='info' />
+                ایجاد تیکت جدید
             </DialogTitle>
             <DialogContent>
             <Box className='flex flex-col justify-between'>                
                 <Box className='m-4' >
-                    <TextField label="title" required   placeholder="Title" {...register("title",{required:true})} />
+                    <TextField fullWidth label="عنوان تیکت" required   placeholder="Title" {...register("title",{required:true})} />
                 </Box>
                 <Box className='m-4' >
-                    <TextField label="message" required rows={5} multiline className='mt-4' placeholder="Message" {...register("message",{required:true})} />
+                    <TextField fullWidth label="متن تیکت" required rows={5} multiline className='mt-4' placeholder="Message" {...register("message",{required:true})} />
                 </Box>
                 {errors.message && <span className='text-sm text-red-500' >
                     This field is required
@@ -53,9 +55,9 @@ const AddTicket = (prop:IProp)=>{
             </Box>
             </DialogContent>
             <DialogActions className='m-4 flex justify-between ' >
-                <Button color='warning'  onClick={handleClose}>Cancel</Button>
-                <Button type='submit' color='primary' variant='contained' autoFocus>
-                    Send
+                <Button color='info'  onClick={handleClose}>کنسل</Button>
+                <Button type='submit' color='error' variant='contained' autoFocus>
+                ارسال تیکت
                 </Button>
             </DialogActions>
             </form>
